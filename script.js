@@ -13,3 +13,10 @@ for (i = 0; i < width; i++) {
     }
     pixelContainer.appendChild(rowDiv);
 }
+
+// pixelContainer.childNodes.forEach(row, (row) => {
+//     row.childNodes.forEach(pixelDiv, () => {
+//         pixelDiv.onmouseover = (event) => event.target.style.color = "black";
+
+//     });
+// });
