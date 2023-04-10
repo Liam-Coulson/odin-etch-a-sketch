@@ -9,14 +9,17 @@ for (i = 0; i < width; i++) {
     for (j = 0; j < height; j++) {
         const pixel = document.createElement("div");
         pixel.classList.add("pixel");
+        pixel.classList.add("pixelDefault");
         rowDiv.appendChild(pixel);
     }
     pixelContainer.appendChild(rowDiv);
 }
 
-// pixelContainer.childNodes.forEach(row, (row) => {
-//     row.childNodes.forEach(pixelDiv, () => {
-//         pixelDiv.onmouseover = (event) => event.target.style.color = "black";
-
-//     });
-// });
+pixelContainer.childNodes.forEach(row => {
+    row.childNodes.forEach(pixelDiv => {
+        pixelDiv.addEventListener("mouseover", () => {
+            pixelDiv.classList.remove("pixelDefault");
+            pixelDiv.classList.add("pixelHovered");
+        })
+    });
+});
