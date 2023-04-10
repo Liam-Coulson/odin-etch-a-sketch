@@ -5,6 +5,24 @@ let colorPicked = colorPicker.value;
 const newGrid = document.getElementById("newGrid");
 const pixelContainer = document.getElementById("pixelContainer");
 
+const clearGrid = document.getElementById("clearGrid");
+
+
+// Event to generate a new grid of pixels of a given size
+
+newGrid.addEventListener("click", () => {
+    let newWidth = parseInt(prompt("Please enter width of new grid (max 100 pixels): "));
+
+    if (typeof newWidth === "number" && newWidth <= 100 && newWidth >= 1) {
+        width = newWidth;
+        height = newWidth;
+        drawGrid(newWidth, newWidth);
+    }
+    else{
+        alert("Something went wrong. Pick values only between 1 and 100.")
+    }
+});
+
 // Event to change paint colour to the user's selection
 
 colorPicker.addEventListener("change", () => {
@@ -12,20 +30,13 @@ colorPicker.addEventListener("change", () => {
     console.log(colorPicked)
 })
 
-// Event to generate a new grid of pixels of a given size
+// Event to clear the grid (redraw the grid)
 
-newGrid.addEventListener("click", () => {
-    let newWidth = parseInt(prompt("Please enter width of new grid (max 100 pixels): "));
-    let newHeight = parseInt(prompt("Please enter height of new grid (max 100 pixels): "));
-
-    if (typeof newWidth === "number" && typeof newHeight === "number"
-        && newWidth <= 100 && newWidth >= 1 && newHeight <= 100 && newHeight >= 1) {
-        drawGrid(newWidth, newHeight);
+clearGrid.addEventListener("click", () => {
+    if (confirm("Are you sure you want to clear the grid?")) {
+        drawGrid(width, height);
     }
-    else{
-        alert("Something went wrong. Pick values only between 1 and 100.")
-    }
-});
+})
 
 function drawGrid(width, height) {
     // Deletes the previous grid if there was a previous grid
