@@ -18,11 +18,13 @@
 .pixelRow {
     display: flex;
     flex-wrap: nowrap;
+    max-width: 800px;
 }
 
 .pixel {
     width: 32px;
-    height: 32px;
+    /* aspect-ratio makes the squares stay square-shaped in bigger grids */
+    aspect-ratio: 1 / 1; 
     border-color: black;
     border-style: solid;
     border-width: 1px;
