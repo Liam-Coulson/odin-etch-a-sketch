@@ -1,5 +1,7 @@
 let width = 16;
 let height = 16;
+const colorPicker = document.getElementById("colorpicker");
+let colorPicked = colorPicker.value;
 
 const pixelContainer = document.getElementById("pixelContainer");
 
@@ -18,8 +20,12 @@ for (i = 0; i < width; i++) {
 pixelContainer.childNodes.forEach(row => {
     row.childNodes.forEach(pixelDiv => {
         pixelDiv.addEventListener("mouseover", () => {
-            pixelDiv.classList.remove("pixelDefault");
-            pixelDiv.classList.add("pixelHovered");
+            pixelDiv.style.backgroundColor = colorPicked;
         })
     });
 });
+
+colorPicker.addEventListener("change", () => {
+    colorPicked = colorpicker.value;
+    console.log(colorPicked)
+})
