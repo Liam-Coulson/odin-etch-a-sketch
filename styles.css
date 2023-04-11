@@ -25,15 +25,8 @@
     width: 32px;
     /* aspect-ratio makes the squares stay square-shaped in bigger grids */
     aspect-ratio: 1 / 1; 
+    background-color: white;
     border-color: black;
     border-style: solid;
     border-width: 1px;
-}
-
-.pixelDefault {
-    background-color: white;
-}
-
-.pixelHovered {
-    background-color: black;
 }

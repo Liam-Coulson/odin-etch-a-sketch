@@ -50,7 +50,6 @@ function drawGrid(width, height) {
         for (j = 0; j < height; j++) {
             const pixel = document.createElement("div");
             pixel.classList.add("pixel");
-            pixel.classList.add("pixelDefault");
             rowDiv.appendChild(pixel);
         }
         pixelContainer.appendChild(rowDiv);
