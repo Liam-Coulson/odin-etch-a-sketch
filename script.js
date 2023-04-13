@@ -1,12 +1,13 @@
-let width = 16;
-let height = 16;
-const colorPicker = document.getElementById("colorPicker");
-let colorPicked = colorPicker.value;
 const newGrid = document.getElementById("newGrid");
+const colorPicker = document.getElementById("colorPicker");
+const randomColor = document.getElementById("randomColor");
+const clearGrid = document.getElementById("clearGrid");
 const pixelContainer = document.getElementById("pixelContainer");
 
-const clearGrid = document.getElementById("clearGrid");
-
+let width = 16;
+let height = 16;
+let colorPicked = colorPicker.value;
+let isRandomColor = false;
 
 // Event to generate a new grid of pixels of a given size
 
@@ -27,7 +28,12 @@ newGrid.addEventListener("click", () => {
 
 colorPicker.addEventListener("change", () => {
     colorPicked = colorPicker.value;
-    console.log(colorPicked)
+})
+
+randomColor.addEventListener("change", () => {
+    isRandomColor = randomColor.checked;
+    console.log("random color mode changed");
+    console.log(isRandomColor);
 })
 
 // Event to clear the grid (redraw the grid)
@@ -60,10 +66,35 @@ function drawGrid(width, height) {
     pixelContainer.childNodes.forEach(row => {
         row.childNodes.forEach(pixelDiv => {
             pixelDiv.addEventListener("mouseover", () => {
-                pixelDiv.style.backgroundColor = colorPicked;
+                if (!isRandomColor) {
+                    pixelDiv.style.backgroundColor = colorPicked;
+                }
+                else {
+                    pixelDiv.style.backgroundColor = getRandomHexColor(pixelDiv);
+                }
             })
         });
     });
+}
+
+// Picks a random RGB colour when "random color mode" is checked
+
+function getRandomHexColor (pixel) {
+    let R = Math.floor(Math.random() * 255).toString(16);
+    let G = Math.floor(Math.random() * 255).toString(16);
+    let B = Math.floor(Math.random() * 255).toString(16);
+
+    if (R.length < 2) {
+        R = R + "0";
+    }
+    if (G.length < 2) {
+        G = G + "0";
+    }
+    if (B.length < 2) {
+        B = B + "0";
+    }
+    let newBackgroundColor = "#"+R+G+B;
+    return newBackgroundColor;
 }
 
 // On page startup generate the pixel grid with default width and height
