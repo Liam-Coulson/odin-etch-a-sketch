@@ -1,6 +1,7 @@
 const newGrid = document.getElementById("newGrid");
 const colorPicker = document.getElementById("colorPicker");
 const randomColor = document.getElementById("randomColor");
+const darkenToBlack = document.getElementById("darkenToBlack");
 const clearGrid = document.getElementById("clearGrid");
 const pixelContainer = document.getElementById("pixelContainer");
 
@@ -8,6 +9,7 @@ let width = 16;
 let height = 16;
 let colorPicked = colorPicker.value;
 let isRandomColor = false;
+let isDarkenToBlack = false;
 
 // Event to generate a new grid of pixels of a given size
 
@@ -30,10 +32,22 @@ colorPicker.addEventListener("change", () => {
     colorPicked = colorPicker.value;
 })
 
+// Event to turn on random colour mode if checkbox is checked
+
 randomColor.addEventListener("change", () => {
     isRandomColor = randomColor.checked;
-    console.log("random color mode changed");
-    console.log(isRandomColor);
+    if (darkenToBlack.checked == true) {
+        darkenToBlack.checked = false;
+    }
+})
+
+// Event to turn on darken to black mode if checkbox is checked
+
+darkenToBlack.addEventListener("change", () => {
+    isDarkenToBlack = darkenToBlack.checked;
+    if (randomColor.checked == true) {
+        randomColor.checked = false;
+    }
 })
 
 // Event to clear the grid (redraw the grid)
@@ -66,11 +80,14 @@ function drawGrid(width, height) {
     pixelContainer.childNodes.forEach(row => {
         row.childNodes.forEach(pixelDiv => {
             pixelDiv.addEventListener("mouseover", () => {
-                if (!isRandomColor) {
-                    pixelDiv.style.backgroundColor = colorPicked;
+                if (isRandomColor) {
+                    pixelDiv.style.backgroundColor = getRandomHexColor(pixelDiv);
+                }
+                else if (isDarkenToBlack) {
+                    pixelDiv.style.backgroundColor = darkenColor(pixelDiv);
                 }
                 else {
-                    pixelDiv.style.backgroundColor = getRandomHexColor(pixelDiv);
+                    pixelDiv.style.backgroundColor = colorPicked;
                 }
             })
         });
@@ -95,6 +112,43 @@ function getRandomHexColor (pixel) {
     }
     let newBackgroundColor = "#"+R+G+B;
     return newBackgroundColor;
+}
+
+function darkenColor(pixel) {
+    // The CMYK color system stores blackness as a % so we can use this to help us
+    // as the task asks us to add 10% blackness per pass over a pixel, so that
+    // after 10 passes, the pixel is completely black.
+
+    let currentColor = pixel.style.backgroundColor;
+    if (currentColor == "") {
+        currentColor = "rgb(255, 255, 255)"
+    }
+
+    currentColorArray = currentColor.slice(4, currentColor.length -1).split(",");
+    for (let i = 0; i <= 2; i++) {
+        currentColorArray[i] = currentColorArray[i].trim();
+    }
+
+    let R = currentColorArray[0]/255;
+    let G = currentColorArray[1]/255;
+    let B = currentColorArray[2]/255;
+
+    let K = 1 - Math.max(R, G, B);
+    let C = (1-R-K)/(1-K);
+    let M = (1-G-K)/(1-K);
+    let Y = (1-B-K)/(1-K);
+
+    K = K + 0.10;
+    if (K > 1) {
+        K = 1;
+    }
+
+    R = Math.floor(255*(1-C)*(1-K));
+    G = Math.floor(255*(1-M)*(1-K));
+    B = Math.floor(255*(1-Y)*(1-K));
+
+    newColor = `rgb(${R}, ${G}, ${B})`;
+    pixel.style.backgroundColor = newColor;
 }
 
 // On page startup generate the pixel grid with default width and height
