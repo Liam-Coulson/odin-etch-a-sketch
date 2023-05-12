@@ -7,14 +7,32 @@
 <body>
     <script type="text/javascript" src="script.js" defer></script>
 
-    <div id="menuBar">
+    <div id="header">
+        Etch-a-Sketch
+    </div>
+    
+    <div id="menuBar" class="center">
         <button class="menuIcon" id="newGrid">Create New Grid</button>
         <input type="color" class="menuIcon" id="colorPicker" value="#ffffff">
-        <label>Random Colour Mode: <input type="checkbox" id="randomColor"></label>
-        <label>Darken To Black Mode: <input type="checkbox" id="darkenToBlack"></label>
+        <label>Random Colour: <input type="checkbox" id="randomColor"></label>
+        <label>Darken: <input type="checkbox" id="darkenToBlack"></label>
         <button class="menuIcon" id="clearGrid">Clear</button>
     </div>
     
+    
     <div id="pixelContainer"></div>
+
+    <div id="instructions" class="center">
+        <h4>Instructions for Use</h4>
+        <p>Hover over the grid to colour in the Etch-a-Sketch.
+            Select a colour by clicking on the rectangle inside the button. 
+            To fill in the Etch-a-Sketch with random colours, tick the "Random 
+            Colour" box.
+            To darken the colours in the Etch-a-Sketch, tick the "Darken" box.
+            To clear the Etch-a-Sketch, click the "Clear" button.
+            To create a new grid, click "Create New Grid" and specify the dimension
+            of the new grid.
+        </p>
+    </div>
 
 </body>
