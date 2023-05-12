@@ -38,6 +38,7 @@ randomColor.addEventListener("change", () => {
     isRandomColor = randomColor.checked;
     if (darkenToBlack.checked == true) {
         darkenToBlack.checked = false;
+        isDarkenToBlack = darkenToBlack.checked;
     }
 })
 
@@ -47,6 +48,7 @@ darkenToBlack.addEventListener("change", () => {
     isDarkenToBlack = darkenToBlack.checked;
     if (randomColor.checked == true) {
         randomColor.checked = false;
+        isRandomColor = randomColor.checked;
     }
 })
 
