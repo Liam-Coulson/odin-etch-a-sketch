@@ -11,3 +11,7 @@ This version of the project meets all the requirements laid out in the project d
 Additional features added beyond the requirements:
 * Allows the user to reset/clear the grid by pressing the "Clear" button
 * Includes the "darken to black" feature where each pass over a pixel adds 10% blackness to it (using CMYK)
+
+TODO
+* Make it so even for low grid sizes, the grid stays the same absolute size, e.g. going from 50x50 to 64x64 the grid stays the same size, but 50x50 to 10x10 the grid becomes smaller
+* Make header a bit prettier, maybe link back to github homepage site
